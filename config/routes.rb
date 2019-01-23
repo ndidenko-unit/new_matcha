@@ -7,6 +7,7 @@ Rails.application.routes.draw do
     member do
       get :friends
       get :followers
+      get :blocks
       get :deactivate
       get :mentionable
     end
@@ -27,6 +28,8 @@ Rails.application.routes.draw do
 
   match :follow, to: 'follows#create', as: :follow, via: :post
   match :unfollow, to: 'follows#destroy', as: :unfollow, via: :post
+  match :block, to: 'follows#block', as: :block, via: :post
+  match :unblock, to: 'follows#unblock', as: :unblock, via: :post
   match :like, to: 'likes#create', as: :like, via: :post
   match :unlike, to: 'likes#destroy', as: :unlike, via: :post
   match :find_friends, to: 'home#find_friends', as: :find_friends, via: :get

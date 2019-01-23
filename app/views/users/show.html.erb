@@ -3,6 +3,11 @@
 <div id="user-<%= @user.id %>" class="row">
   <div class="col-lg-3">
     <%= render 'shared/user_info' %>
+    <% unless @user == current_user %>
+      <div id="user-info" class="well">
+        <%= render 'block_button', user: @user %>
+      </div>
+    <% end %>
   </div>
   <div class="col-lg-6">
     <div id="activities">

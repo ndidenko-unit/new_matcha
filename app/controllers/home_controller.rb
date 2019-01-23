@@ -10,12 +10,11 @@ class HomeController < ApplicationController
   end
 
   def front
-    @activities = PublicActivity::Activity.joins("INNER JOIN users ON activities.owner_id = users.id").order(created_at: :desc).paginate(page: params[:page], per_page: 10)
+    @activities = PublicActivity::Activity.where.not(trackable_type: :Follow).joins("INNER JOIN users ON activities.owner_id = users.id").order(created_at: :desc).paginate(page: params[:page], per_page: 10)
   end
 
   def find_friends
-    @friends = @user.all_following
-    @users =  User.where.not(id: @friends.unshift(@user)).paginate(page: params[:page], per_page: 10)
+    @users =  (User.where.not(id: current_user.id) - current_user.blocks).paginate(page: params[:page], per_page: 10)
   end
 
   private

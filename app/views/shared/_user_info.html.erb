@@ -36,7 +36,9 @@
   <br>
   <div class="text-center">
     <% unless is_current_user?(@user) %>
-      <%= render 'follows/form', user: @user %>
+      <%= render 'follows/form', user: @user unless current_user.blocks.include?(@user) %>
+      <%= 'This user is blocked' if current_user.blocks.include?(@user) %>
+      <%= '<br>This user has blocked you'.html_safe if @user.blocks.include?(current_user) %>
       <h6><%= 'Follows you' if current_user.followed_by?(@user) %></h6>
     <% end %>
   </div>

@@ -1,5 +1,6 @@
 
 class UsersController < ApplicationController
+  require 'will_paginate/array'
   before_action :authenticate_user!
   before_action :set_user
   before_action :check_ownership, only: [:edit, :update]
@@ -24,11 +25,16 @@ class UsersController < ApplicationController
   end
 
   def friends
-    @friends = @user.following_users.paginate(page: params[:page])
+    @friends = (@user.following_users - @user.blocks).paginate(page: params[:page])
   end
 
   def followers
-    @followers = @user.user_followers.paginate(page: params[:page])
+    @followers = (@user.user_followers - @user.blocks).paginate(page: params[:page])
+  end
+
+  def blocks
+    @blocks = current_user.blocks
+    @blocks = @blocks.paginate(page: params[:page]) if @blocks.present?
   end
 
   def mentionable

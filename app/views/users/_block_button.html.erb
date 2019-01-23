@@ -1,0 +1,11 @@
+<div class="block text-center">
+  <% if current_user.blocks.include?(user) %>
+    <%= form_tag unblock_path(user_id: user.id), method: :post do %>
+      <%= button_tag 'unblock', class: 'btn btn-danger' %>
+    <% end %>
+  <% else %>
+    <%= form_tag block_path(user_id: user.id), method: :post do %>
+      <%= button_tag 'block', class: 'btn btn-danger' %>
+    <% end %>
+  <% end %>
+</div>

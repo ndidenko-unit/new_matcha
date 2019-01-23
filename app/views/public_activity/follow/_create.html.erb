@@ -1,10 +1,11 @@
-<% if activity_resources_exist?(activity) && activity.trackable.followable %>
+<% if activity_resources_exist?(activity) && activity.trackable.followable && activity.trackable_type != "Follow" %>
   <div id="activity-<%= activity.id %>" class="activity">
     <div class="activity-follow">
       <div class="follower">
         <%= render 'shared/avatar', user: activity.owner %>
         <h4 class="name"><%= link_to activity.owner.name, user_path(activity.owner) %></h4>
-        <span class="action">Followed </span>
+        <span class="action">
+          Followed </span>
       </div>
       <div class="followee">
         <%= render 'shared/avatar', user: activity.trackable.followable %>

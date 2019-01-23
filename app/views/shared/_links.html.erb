@@ -20,6 +20,10 @@
     <%= link_to 'Followers', followers_user_path(current_user) %>
   </h5>
   <h5>
+    <%= fa_icon 'lock' %>
+    <%= link_to 'Blocks', blocks_user_path(current_user) %>
+  </h5>
+  <h5>
     <%= fa_icon 'search' %>
     <%= link_to('Find Friends', find_friends_path)%>
   </h5>
