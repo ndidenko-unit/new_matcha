@@ -33,7 +33,15 @@ Rails.application.routes.draw do
   match :like, to: 'likes#create', as: :like, via: :post
   match :unlike, to: 'likes#destroy', as: :unlike, via: :post
   match :find_friends, to: 'home#find_friends', as: :find_friends, via: :get
+  match :chats, to: 'home#chats', as: :chats, via: :get
   match :about, to: 'home#about', as: :about, via: :get
+
+  resources :conversations, only: [:create] do
+    member do
+      post :close
+    end
+    resources :messages, only: [:create]
+  end
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

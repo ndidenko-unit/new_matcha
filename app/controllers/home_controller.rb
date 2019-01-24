@@ -17,6 +17,13 @@ class HomeController < ApplicationController
     @users =  (User.where.not(id: current_user.id) - current_user.blocks).paginate(page: params[:page], per_page: 10)
   end
 
+  def chats
+    session[:conversations] ||= []
+    @users = @user.following_users - @user.blocks
+    @conversations = Conversation.includes(:recipient, :messages)
+                         .find(session[:conversations])
+  end
+
   private
   def set_user
     @user = current_user
