@@ -35,7 +35,6 @@ Rails.application.routes.draw do
   match :find_friends, to: 'home#find_friends', as: :find_friends, via: :get
   match :chats, to: 'home#chats', as: :chats, via: :get
   match :about, to: 'home#about', as: :about, via: :get
-
   resources :conversations, only: [:create] do
     member do
       post :close
