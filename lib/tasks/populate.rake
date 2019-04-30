@@ -29,13 +29,13 @@ namespace :fill do
     end
 
     user = User.new(name: 'Mykyta Didenko', email: 'ndidenko@matcha.com', sex: 'male', password: 'password')
-    user.skip_confirmation!
+    # user.skip_confirmation!
     user.save!
     puts 'Created test user with email=ndidenko@matcha.com and password=password'
 
     for i in 1..5
       user = User.new(name: "test#{i}", email: "test#{i}@matcha.com", sex: 'male', password: 'password')
-      user.skip_confirmation!
+      # user.skip_confirmation!
       user.save!
       puts "Created test user with email=test#{i}@matcha.com and password=password"
     end
