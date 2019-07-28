@@ -44,6 +44,8 @@ GEM
       i18n (~> 0.7)
       minitest (~> 5.1)
       tzinfo (~> 1.1)
+    acts-as-taggable-on (6.0.0)
+      activerecord (~> 5.0)
     acts_as_commentable (4.0.2)
     acts_as_follower (0.2.1)
     acts_as_votable (0.10.0)
@@ -76,7 +78,18 @@ GEM
       mime-types (>= 1.16)
     case_transform (0.2)
       activesupport
+    chosen-rails (1.8.7)
+      coffee-rails (>= 3.2)
+      railties (>= 3.0)
+      sass-rails (>= 3.2)
     coderay (1.1.2)
+    coffee-rails (4.2.2)
+      coffee-script (>= 2.2.0)
+      railties (>= 4.0.0)
+    coffee-script (2.4.1)
+      coffee-script-source
+      execjs
+    coffee-script-source (1.12.2)
     concurrent-ruby (1.1.4)
     counter_culture (0.1.34)
       activerecord (>= 3.0.0)
@@ -382,6 +395,8 @@ GEM
       nokogiri (>= 1.6)
     rails-html-sanitizer (1.0.4)
       loofah (~> 2.2, >= 2.2.2)
+    rails-ujs (0.1.0)
+      railties (>= 3.1)
     rails_12factor (0.0.3)
       rails_serve_static_assets
       rails_stdout_logging
@@ -496,6 +511,7 @@ PLATFORMS
 
 DEPENDENCIES
   active_model_serializers
+  acts-as-taggable-on (~> 6.0)
   acts_as_commentable
   acts_as_follower
   acts_as_votable (~> 0.10.0)
@@ -505,6 +521,7 @@ DEPENDENCIES
   binding_of_caller
   bootstrap-sass (~> 3.3.6)
   carrierwave
+  chosen-rails
   counter_culture (~> 0.1.33)
   devise
   faker
@@ -515,7 +532,7 @@ DEPENDENCIES
   guard
   guard-rspec (~> 4.2.8)
   jquery-atwho-rails
-  jquery-rails
+  jquery-rails (~> 4.3, >= 4.3.3)
   letter_opener
   listen (~> 3.0.5)
   merit
@@ -525,6 +542,7 @@ DEPENDENCIES
   public_activity
   puma
   rails (= 5.0.2)
+  rails-ujs (~> 0.1.0)
   rails_12factor
   sanitize
   sass-rails (~> 5.0.0)

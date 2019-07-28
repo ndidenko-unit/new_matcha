@@ -8,6 +8,7 @@ class User < ActiveRecord::Base
   acts_as_voter
   acts_as_follower
   acts_as_followable
+  acts_as_taggable
 
   has_many :posts
   has_many :comments
@@ -24,4 +25,8 @@ class User < ActiveRecord::Base
 
   extend FriendlyId
     friendly_id :name, use: [:slugged, :finders]
+
+  def tags_string
+    self.tags.map{ |t| t.name}.join(' ')
+  end
 end

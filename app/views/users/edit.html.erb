@@ -23,6 +23,10 @@
           <%= f.text_field :name, placeholder: 'Full Name', class: 'form-control' %>
         </div>
         <div class="form-group">
+          <%= f.label 'Tags (must be separated by a space)' %>
+          <%= f.text_area :tag_list, placeholder: 'Tags', class: 'form-control' %>
+        </div>
+        <div class="form-group">
           <%= f.label :about %>
           <%= f.text_area :about, placeholder: 'About', class: 'form-control' %>
         </div>

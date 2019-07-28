@@ -14,6 +14,7 @@ class UsersController < ApplicationController
   end
 
   def update
+    # _update_user_tags(params[:user][:tags_string])
     if @user.update(user_params)
       redirect_to user_path(@user)
     else
@@ -45,7 +46,7 @@ class UsersController < ApplicationController
 
   def user_params
     params.require(:user).permit(:name, :about, :avatar, :cover,
-                                 :sex, :dob, :location, :phone_number)
+                                 :sex, :dob, :location, :phone_number, :tag_list)
   end
 
   def check_ownership
@@ -55,5 +56,12 @@ class UsersController < ApplicationController
   def set_user
     @user = User.friendly.find_by(slug: params[:id]) || User.find_by(id: params[:id])
     render_404 and return unless @user
+  end
+
+  def _update_user_tags(tag_string)
+    @user.tags.delete_all
+    params[:user][:tags_string].split.each do |tag|
+      Tag.create(name: tag, user: @user)
+    end
   end
 end

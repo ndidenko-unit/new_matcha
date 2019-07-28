@@ -10,7 +10,8 @@ gem 'sass-rails', '~> 5.0.0'
 gem 'uglifier', '>= 1.3.0'
 
 # Use jquery as the JavaScript library
-gem 'jquery-rails'
+gem 'jquery-rails', '~> 4.3', '>= 4.3.3'
+gem 'rails-ujs', '~> 0.1.0'
 gem 'merit'
 # Used to implement at.js for auto complete mentions/emojis
 gem 'jquery-atwho-rails'
@@ -45,6 +46,10 @@ group :production do
   gem 'fog-aws'
 end
 
+group :assets do
+  gem 'chosen-rails'
+end
+
 gem 'devise'
 gem 'carrierwave'
 gem 'friendly_id', '~> 5.0'
@@ -52,6 +57,7 @@ gem 'friendly_id', '~> 5.0'
 gem 'will_paginate', '~> 3.1.0'
 gem 'public_activity'
 
+gem 'acts-as-taggable-on', '~> 6.0'
 gem 'acts_as_votable', '~> 0.10.0'
 gem 'acts_as_commentable'
 gem 'acts_as_follower'

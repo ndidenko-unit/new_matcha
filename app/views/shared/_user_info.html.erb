@@ -20,16 +20,15 @@
     </h5>
   <% end %>
   <h5>
-    <i class="icon-record"></i> <%= pluralize(@user.points, 'point') %>
+    <%= fa_icon 'heart' %><%= pluralize(@user.points, 'point') %>
   </h5>
-  <% if @user.badges.empty? %>
-    <h5>No badge yet.</h5>
+  <% if @user.tags.empty? %>
+    <h5>No tags yet.</h5>
   <% else %>
     <h5>
-      <% @user.badges.each do |badge| %>
-        <i class="<%= badge.custom_fields[:icon] %>" style="color: <%= badge.custom_fields[:color] %>">
-        </i>
-        <%= badge.name %>
+      <%= fa_icon 'hashtag' %>
+      <% @user.tags.each do |tag| %>
+        <%= "#{tag.name} " %>
       <% end %>
     </h5>
   <% end %>
