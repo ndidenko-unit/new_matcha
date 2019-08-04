@@ -19,7 +19,7 @@ namespace :fill do
       user.name = Faker::Name.name
       user.email = Faker::Internet.email
       user.sex = genders
-      user.dob = Faker::Date.between(45.years.ago, 15.years.ago)
+      user.dob = ("01/01/" + rand(1970..2000).to_s).to_date
       user.phone_number = Faker::PhoneNumber.cell_phone
       user.encrypted_password = User.new(password: password).encrypted_password
       user.confirmed_at = DateTime.now
@@ -29,13 +29,17 @@ namespace :fill do
     end
 
     user = User.new(name: 'Mykyta Didenko', email: 'ndidenko@matcha.com', sex: 'male', password: 'password')
-    user.skip_confirmation!
+    # user.skip_confirmation!
+    user.dob = ("01/01/" + rand(1970..2000).to_s).to_date
+    user.phone_number = Faker::PhoneNumber.cell_phone
     user.save!
     puts 'Created test user with email=ndidenko@matcha.com and password=password'
 
     for i in 1..5
       user = User.new(name: "test#{i}", email: "test#{i}@matcha.com", sex: 'male', password: 'password')
-      user.skip_confirmation!
+      # user.skip_confirmation!
+      user.dob = ("01/01/" + rand(1970..2000).to_s).to_date
+      user.phone_number = Faker::PhoneNumber.cell_phone
       user.save!
       puts "Created test user with email=test#{i}@matcha.com and password=password"
     end

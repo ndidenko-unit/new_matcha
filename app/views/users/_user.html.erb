@@ -1,8 +1,10 @@
 <br>
-<div id="user-<%= user.id %>" class="row">
+<div id="user-<%= user.id %>" class="row border">
   <div class="col-lg-8">
     <%= render 'shared/avatar', user: user %>
     <h5 class="name"><%= link_to user.name, user %></h5>
+    <br>
+    <%= render 'shared/user_data', user: user %>
   </div>
   <div class="col-lg-4">
     <div class="follow">

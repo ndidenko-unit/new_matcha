@@ -4,6 +4,23 @@
   </div>
   <div class="col-lg-6 well">
     <h3>Find Friends</h3>
+    <%= form_tag find_friends_path, method: 'get', class: 'editable' do %>
+      <div class="form-group"><%= text_field_tag :search_name, params[:search_name], class: 'form-control', size: 50, placeholder: "Search by name" %></div>
+      <div class="input-group">
+        <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+        <%= text_field_tag :search_age_min, params[:search_age_min], class: 'form-control', style: 'width:50%', placeholder: "MIN age" %>
+        <%= text_field_tag :search_age_max, params[:search_age_max], class: 'form-control', style: 'width:50%', placeholder: "MAX age" %>
+      </div>
+      <%= check_box_tag(:only_girls) %>
+      <%= label_tag(:only_girls, "Show only girls") %>
+      <div class="pull-right">
+        <%= check_box_tag(:only_boys) %>
+        <%= label_tag(:only_boys, "Show only boys") %>
+      </div>
+      <br>
+      <div class="form-group"><%= submit_tag 'Search', name: nil, class: 'btn btn-primary btn-block' %></div>
+      <div class="form-group"><%= label_tag :search, 'Search' %></div>
+    <% end %>
     <hr>
     <%= will_paginate @users %>
     <div id="users">

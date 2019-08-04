@@ -12,6 +12,9 @@
 
 ActiveRecord::Schema.define(version: 20190728171758) do
 
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "activities", force: :cascade do |t|
     t.string   "trackable_type"
     t.integer  "trackable_id"
@@ -23,9 +26,9 @@ ActiveRecord::Schema.define(version: 20190728171758) do
     t.integer  "recipient_id"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.index ["owner_id", "owner_type"], name: "index_activities_on_owner_id_and_owner_type"
-    t.index ["recipient_id", "recipient_type"], name: "index_activities_on_recipient_id_and_recipient_type"
-    t.index ["trackable_id", "trackable_type"], name: "index_activities_on_trackable_id_and_trackable_type"
+    t.index ["owner_id", "owner_type"], name: "index_activities_on_owner_id_and_owner_type", using: :btree
+    t.index ["recipient_id", "recipient_type"], name: "index_activities_on_recipient_id_and_recipient_type", using: :btree
+    t.index ["trackable_id", "trackable_type"], name: "index_activities_on_trackable_id_and_trackable_type", using: :btree
   end
 
   create_table "badges_sashes", force: :cascade do |t|
@@ -33,9 +36,9 @@ ActiveRecord::Schema.define(version: 20190728171758) do
     t.integer  "sash_id"
     t.boolean  "notified_user", default: false
     t.datetime "created_at"
-    t.index ["badge_id", "sash_id"], name: "index_badges_sashes_on_badge_id_and_sash_id"
-    t.index ["badge_id"], name: "index_badges_sashes_on_badge_id"
-    t.index ["sash_id"], name: "index_badges_sashes_on_sash_id"
+    t.index ["badge_id", "sash_id"], name: "index_badges_sashes_on_badge_id_and_sash_id", using: :btree
+    t.index ["badge_id"], name: "index_badges_sashes_on_badge_id", using: :btree
+    t.index ["sash_id"], name: "index_badges_sashes_on_sash_id", using: :btree
   end
 
   create_table "comments", force: :cascade do |t|
@@ -48,9 +51,9 @@ ActiveRecord::Schema.define(version: 20190728171758) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.text     "comment_html"
-    t.index ["commentable_id"], name: "index_comments_on_commentable_id"
-    t.index ["commentable_type"], name: "index_comments_on_commentable_type"
-    t.index ["user_id"], name: "index_comments_on_user_id"
+    t.index ["commentable_id"], name: "index_comments_on_commentable_id", using: :btree
+    t.index ["commentable_type"], name: "index_comments_on_commentable_type", using: :btree
+    t.index ["user_id"], name: "index_comments_on_user_id", using: :btree
   end
 
   create_table "conversations", force: :cascade do |t|
@@ -58,7 +61,7 @@ ActiveRecord::Schema.define(version: 20190728171758) do
     t.integer  "sender_id"
     t.datetime "created_at",   null: false
     t.datetime "updated_at",   null: false
-    t.index ["recipient_id", "sender_id"], name: "index_conversations_on_recipient_id_and_sender_id", unique: true
+    t.index ["recipient_id", "sender_id"], name: "index_conversations_on_recipient_id_and_sender_id", unique: true, using: :btree
   end
 
   create_table "events", force: :cascade do |t|
@@ -69,9 +72,9 @@ ActiveRecord::Schema.define(version: 20190728171758) do
     t.datetime "updated_at"
     t.integer  "cached_votes_up", default: 0
     t.integer  "comments_count",  default: 0
-    t.index ["cached_votes_up"], name: "index_events_on_cached_votes_up"
-    t.index ["comments_count"], name: "index_events_on_comments_count"
-    t.index ["user_id"], name: "index_events_on_user_id"
+    t.index ["cached_votes_up"], name: "index_events_on_cached_votes_up", using: :btree
+    t.index ["comments_count"], name: "index_events_on_comments_count", using: :btree
+    t.index ["user_id"], name: "index_events_on_user_id", using: :btree
   end
 
   create_table "follows", force: :cascade do |t|
@@ -82,8 +85,8 @@ ActiveRecord::Schema.define(version: 20190728171758) do
     t.boolean  "blocked",         default: false, null: false
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.index ["followable_id", "followable_type"], name: "fk_followables"
-    t.index ["follower_id", "follower_type"], name: "fk_follows"
+    t.index ["followable_id", "followable_type"], name: "fk_followables", using: :btree
+    t.index ["follower_id", "follower_type"], name: "fk_follows", using: :btree
   end
 
   create_table "friendly_id_slugs", force: :cascade do |t|
@@ -92,10 +95,10 @@ ActiveRecord::Schema.define(version: 20190728171758) do
     t.string   "sluggable_type", limit: 50
     t.string   "scope"
     t.datetime "created_at"
-    t.index ["slug", "sluggable_type", "scope"], name: "index_friendly_id_slugs_on_slug_and_sluggable_type_and_scope", unique: true
-    t.index ["slug", "sluggable_type"], name: "index_friendly_id_slugs_on_slug_and_sluggable_type"
-    t.index ["sluggable_id"], name: "index_friendly_id_slugs_on_sluggable_id"
-    t.index ["sluggable_type"], name: "index_friendly_id_slugs_on_sluggable_type"
+    t.index ["slug", "sluggable_type", "scope"], name: "index_friendly_id_slugs_on_slug_and_sluggable_type_and_scope", unique: true, using: :btree
+    t.index ["slug", "sluggable_type"], name: "index_friendly_id_slugs_on_slug_and_sluggable_type", using: :btree
+    t.index ["sluggable_id"], name: "index_friendly_id_slugs_on_sluggable_id", using: :btree
+    t.index ["sluggable_type"], name: "index_friendly_id_slugs_on_sluggable_type", using: :btree
   end
 
   create_table "merit_actions", force: :cascade do |t|
@@ -137,8 +140,8 @@ ActiveRecord::Schema.define(version: 20190728171758) do
     t.integer  "conversation_id"
     t.datetime "created_at",      null: false
     t.datetime "updated_at",      null: false
-    t.index ["conversation_id"], name: "index_messages_on_conversation_id"
-    t.index ["user_id"], name: "index_messages_on_user_id"
+    t.index ["conversation_id"], name: "index_messages_on_conversation_id", using: :btree
+    t.index ["user_id"], name: "index_messages_on_user_id", using: :btree
   end
 
   create_table "posts", force: :cascade do |t|
@@ -150,9 +153,9 @@ ActiveRecord::Schema.define(version: 20190728171758) do
     t.integer  "cached_votes_up", default: 0
     t.integer  "comments_count",  default: 0
     t.text     "content_html"
-    t.index ["cached_votes_up"], name: "index_posts_on_cached_votes_up"
-    t.index ["comments_count"], name: "index_posts_on_comments_count"
-    t.index ["user_id"], name: "index_posts_on_user_id"
+    t.index ["cached_votes_up"], name: "index_posts_on_cached_votes_up", using: :btree
+    t.index ["comments_count"], name: "index_posts_on_comments_count", using: :btree
+    t.index ["user_id"], name: "index_posts_on_user_id", using: :btree
   end
 
   create_table "sashes", force: :cascade do |t|
@@ -168,21 +171,21 @@ ActiveRecord::Schema.define(version: 20190728171758) do
     t.integer  "tagger_id"
     t.string   "context",       limit: 128
     t.datetime "created_at"
-    t.index ["context"], name: "index_taggings_on_context"
-    t.index ["tag_id", "taggable_id", "taggable_type", "context", "tagger_id", "tagger_type"], name: "taggings_idx", unique: true
-    t.index ["tag_id"], name: "index_taggings_on_tag_id"
-    t.index ["taggable_id", "taggable_type", "context"], name: "index_taggings_on_taggable_id_and_taggable_type_and_context"
-    t.index ["taggable_id", "taggable_type", "tagger_id", "context"], name: "taggings_idy"
-    t.index ["taggable_id"], name: "index_taggings_on_taggable_id"
-    t.index ["taggable_type"], name: "index_taggings_on_taggable_type"
-    t.index ["tagger_id", "tagger_type"], name: "index_taggings_on_tagger_id_and_tagger_type"
-    t.index ["tagger_id"], name: "index_taggings_on_tagger_id"
+    t.index ["context"], name: "index_taggings_on_context", using: :btree
+    t.index ["tag_id", "taggable_id", "taggable_type", "context", "tagger_id", "tagger_type"], name: "taggings_idx", unique: true, using: :btree
+    t.index ["tag_id"], name: "index_taggings_on_tag_id", using: :btree
+    t.index ["taggable_id", "taggable_type", "context"], name: "index_taggings_on_taggable_id_and_taggable_type_and_context", using: :btree
+    t.index ["taggable_id", "taggable_type", "tagger_id", "context"], name: "taggings_idy", using: :btree
+    t.index ["taggable_id"], name: "index_taggings_on_taggable_id", using: :btree
+    t.index ["taggable_type"], name: "index_taggings_on_taggable_type", using: :btree
+    t.index ["tagger_id", "tagger_type"], name: "index_taggings_on_tagger_id_and_tagger_type", using: :btree
+    t.index ["tagger_id"], name: "index_taggings_on_tagger_id", using: :btree
   end
 
   create_table "tags", force: :cascade do |t|
     t.string  "name"
     t.integer "taggings_count", default: 0
-    t.index ["name"], name: "index_tags_on_name", unique: true
+    t.index ["name"], name: "index_tags_on_name", unique: true, using: :btree
   end
 
   create_table "users", force: :cascade do |t|
@@ -213,10 +216,10 @@ ActiveRecord::Schema.define(version: 20190728171758) do
     t.string   "slug"
     t.integer  "sash_id"
     t.integer  "level",                  default: 0
-    t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
-    t.index ["email"], name: "index_users_on_email", unique: true
-    t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
-    t.index ["slug"], name: "index_users_on_slug", unique: true
+    t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true, using: :btree
+    t.index ["email"], name: "index_users_on_email", unique: true, using: :btree
+    t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
+    t.index ["slug"], name: "index_users_on_slug", unique: true, using: :btree
   end
 
   create_table "votes", force: :cascade do |t|
@@ -229,8 +232,10 @@ ActiveRecord::Schema.define(version: 20190728171758) do
     t.integer  "vote_weight"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.index ["votable_id", "votable_type", "vote_scope"], name: "index_votes_on_votable_id_and_votable_type_and_vote_scope"
-    t.index ["voter_id", "voter_type", "vote_scope"], name: "index_votes_on_voter_id_and_voter_type_and_vote_scope"
+    t.index ["votable_id", "votable_type", "vote_scope"], name: "index_votes_on_votable_id_and_votable_type_and_vote_scope", using: :btree
+    t.index ["voter_id", "voter_type", "vote_scope"], name: "index_votes_on_voter_id_and_voter_type_and_vote_scope", using: :btree
   end
 
+  add_foreign_key "messages", "conversations"
+  add_foreign_key "messages", "users"
 end

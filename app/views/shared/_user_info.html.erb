@@ -3,35 +3,7 @@
     <%= render 'shared/avatar', user: @user %><br>
     <h5><%= link_to @user.name, @user %></h5>
   </div>
-  <h5>
-    <%= fa_icon 'shield' %>
-    <%= pluralize(@user.posts_count, 'post') %>
-  </h5>
-  <% if @user.dob.present? %>
-    <h5>
-      <%= fa_icon @user.sex %>
-      <%= "#{pluralize(age(@user.dob), 'year')} old" %>
-    </h5>
-  <% end %>
-  <% if @user.location.present? %>
-    <h5>
-      <%= fa_icon 'map-marker' %>
-      <%= @user.location %>
-    </h5>
-  <% end %>
-  <h5>
-    <%= fa_icon 'heart' %><%= pluralize(@user.points, 'point') %>
-  </h5>
-  <% if @user.tags.empty? %>
-    <h5>No tags yet.</h5>
-  <% else %>
-    <h5>
-      <%= fa_icon 'hashtag' %>
-      <% @user.tags.each do |tag| %>
-        <%= "#{tag.name} " %>
-      <% end %>
-    </h5>
-  <% end %>
+    <%= render 'shared/user_data', user: @user %>
   <br>
   <div class="text-center">
     <% unless is_current_user?(@user) %>

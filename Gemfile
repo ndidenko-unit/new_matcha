@@ -20,6 +20,7 @@ gem 'jquery-atwho-rails'
 gem 'bootstrap-sass', '~> 3.3.6'
 gem 'autoprefixer-rails'
 gem 'font-awesome-rails'
+gem 'pg', '~> 0.20'
 
 group :development do
   gem 'better_errors'
@@ -39,7 +40,6 @@ group :development, :test do
 end
 
 group :production do
-  gem 'pg'
   gem 'unicorn'
   gem 'rails_12factor'
   gem 'fog'
@@ -69,6 +69,7 @@ gem 'auto_html', '~>1.6.4'
 gem 'sanitize'
 
 gem 'active_model_serializers'
+gem 'bootstrap-slider-rails'
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'

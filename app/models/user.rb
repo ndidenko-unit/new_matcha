@@ -29,4 +29,9 @@ class User < ActiveRecord::Base
   def tags_string
     self.tags.map{ |t| t.name}.join(' ')
   end
+
+  def age
+    now = Time.now.utc.to_date
+    now.year - self.dob.year
+  end
 end

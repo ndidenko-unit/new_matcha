@@ -14,7 +14,13 @@ class HomeController < ApplicationController
   end
 
   def find_friends
-    @users =  (User.where.not(id: current_user.id) - current_user.blocks).paginate(page: params[:page], per_page: 10)
+    @users = User.where("name ~* ?", params[:search_name]) if params[:search_name].present?
+    @users = (User.where.not(id: current_user.id) - current_user.blocks) if @users.nil?
+    @users = @users.paginate(page: params[:page], per_page: 10)
+    # @users = User.where("name ~* ?", params[:search]) if params[:search].present?
+    # @users = User.all if @users.nil?
+    # # @users = @users - current_user - current_user.blocks
+    # @users = @users.paginate(page: params[:page], per_page: 10)
   end
 
   def chats
