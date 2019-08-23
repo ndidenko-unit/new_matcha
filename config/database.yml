@@ -35,33 +35,33 @@ default: &default
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
   timeout: 5000
 
-#development:
-#  <<: *default
-#  database: db/development.sqlite3
-#
-## Warning: The database defined as "test" will be erased and
-## re-generated from your development database when you run "rake".
-## Do not set this db to the same as development or production.
-#test:
-#  <<: *default
-#  database: db/test.sqlite3
-
 development:
-  adapter: postgresql
-  encoding: unicode
-  database: matcha_dev
-  pool: 5
-  username: ndidenko
-  password:
-
-test:
-  adapter: postgresql
-  encoding: unicode
-  database: matcha_test
-  pool: 5
-  username: ndidenko
-  password:
-
-production:
   <<: *default
-  database: db/production.sqlite3
+  database: db/development.sqlite3
+
+# Warning: The database defined as "test" will be erased and
+# re-generated from your development database when you run "rake".
+# Do not set this db to the same as development or production.
+test:
+  <<: *default
+  database: db/test.sqlite3
+
+#development:
+#  adapter: postgresql
+#  encoding: unicode
+#  database: matcha_dev
+#  pool: 5
+#  username: ndidenko
+#  password:
+#
+#test:
+#  adapter: postgresql
+#  encoding: unicode
+#  database: matcha_test
+#  pool: 5
+#  username: ndidenko
+#  password:
+#
+#production:
+#  <<: *default
+#  database: db/production.sqlite3

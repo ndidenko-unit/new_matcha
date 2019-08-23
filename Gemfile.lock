@@ -282,6 +282,7 @@ GEM
     formatador (0.2.5)
     friendly_id (5.2.5)
       activerecord (>= 4.0.0)
+    geocoder (1.5.1)
     globalid (0.4.2)
       activesupport (>= 4.2.0)
     google-api-client (0.23.9)
@@ -532,6 +533,7 @@ DEPENDENCIES
   fog-aws
   font-awesome-rails
   friendly_id (~> 5.0)
+  geocoder
   guard
   guard-rspec (~> 4.2.8)
   jquery-atwho-rails

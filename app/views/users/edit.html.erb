@@ -33,6 +33,7 @@
         <div class="form-group">
           <%= f.label :location %>
           <%= f.text_field :location, placeholder: 'Location', class: 'form-control' %>
+          <%= image_tag "http://maps.google.com/maps/api/staticmap?size=450x300&sensor=false&zoom=16&markers=#{@user.latitude}%2C#{@user.longitude}" if @user.latitude %>
         </div>
         <div class="form-group">
           <%= f.label :phone_number %>

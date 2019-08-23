@@ -19,7 +19,10 @@ class User < ActiveRecord::Base
   mount_uploader :avatar, AvatarUploader
   mount_uploader :cover, AvatarUploader
 
+  geocoded_by :location
+
   validates_presence_of :name
+  after_validation :geocode, if: :location_changed?
 
   self.per_page = 10
 

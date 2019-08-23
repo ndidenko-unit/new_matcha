@@ -71,6 +71,8 @@ gem 'sanitize'
 gem 'active_model_serializers'
 gem 'bootstrap-slider-rails'
 
+gem 'geocoder'
+
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
