@@ -15,7 +15,7 @@ namespace :fill do
     genders = ['male', 'female']
     password = 'password'
 
-    User.populate 50 do |user|
+    User.populate 100 do |user|
       user.name = Faker::Name.name
       user.email = Faker::Internet.email
       user.sex = genders
@@ -25,6 +25,7 @@ namespace :fill do
       user.confirmed_at = DateTime.now
       user.sign_in_count = 0
       user.posts_count = 0
+      user.location =  %w(Kyiv Kharkiv Odessa Dnipro Donetsk Zaporizhia Lviv Mykolaiv Mariupol Luhansk Vinnytsia Kherson Poltava Chernihiv).sample
       puts "created user #{user.name}"
     end
 
@@ -32,6 +33,8 @@ namespace :fill do
     # user.skip_confirmation!
     user.dob = ("01/01/" + rand(1970..2000).to_s).to_date
     user.phone_number = Faker::PhoneNumber.cell_phone
+    user.latitude = 50.4500336
+    user.longitude = 30.5241361
     user.save!
     puts 'Created test user with email=ndidenko@matcha.com and password=password'
 
@@ -40,6 +43,8 @@ namespace :fill do
       # user.skip_confirmation!
       user.dob = ("01/01/" + rand(1970..2000).to_s).to_date
       user.phone_number = Faker::PhoneNumber.cell_phone
+      user.latitude = rand(50.0...50.9)
+      user.longitude = rand(30.0...30.9)
       user.save!
       puts "Created test user with email=test#{i}@matcha.com and password=password"
     end
@@ -52,7 +57,7 @@ namespace :fill do
     puts '=============='
     users = User.all
 
-    15.times do
+    150.times do
       post = Post.new
       post.content = Populator.sentences(2..4)
       post.user = users.sample
@@ -65,7 +70,7 @@ namespace :fill do
 
     posts = Post.all
 
-    15.times do
+    150.times do
       post = posts.sample
       user = users.sample
       comment = post.comments.new
@@ -90,7 +95,7 @@ namespace :fill do
     puts 'Creating Likes For Posts'
     puts '========================'
 
-    15.times do
+    750.times do
       post = posts.sample
       user = users.sample
       post.liked_by user
@@ -101,7 +106,7 @@ namespace :fill do
     puts '========================='
     events = Event.all
 
-    15.times do
+    150.times do
       event = events.sample
       user = users.sample
       event.liked_by user
@@ -111,7 +116,7 @@ namespace :fill do
     puts 'Creating Comments For Events'
     puts '============================='
 
-    15.times do
+    300.times do
       event = events.sample
       user = users.sample
       comment = event.comments.new

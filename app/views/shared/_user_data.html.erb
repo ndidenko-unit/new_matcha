@@ -11,7 +11,9 @@
 <% if user.location.present? %>
   <h5>
     <%= fa_icon 'map-marker' %>
-    <%= user.location %>
+    <%= user.location + ' - ' %>
+    <%= Geocoder::Calculations.distance_between([current_user.latitude, current_user.longitude],
+                               [user.latitude, user.longitude]).to_i.to_s + ' km distance from you' %>
   </h5>
 <% end %>
 <h5>

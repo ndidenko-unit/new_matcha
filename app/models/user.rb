@@ -23,6 +23,7 @@ class User < ActiveRecord::Base
 
   validates_presence_of :name
   after_validation :geocode, if: :location_changed?
+  before_validation :geocode, on: %i[create update]
 
   self.per_page = 10
 
