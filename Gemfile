@@ -47,7 +47,7 @@ group :production do
   gem 'fog-aws'
 end
 
-gem 'devise', '~> 4.4.0'
+gem 'devise', '~> 4.7.1'
 gem 'carrierwave'
 gem 'friendly_id', '~> 5.0'
 
