@@ -13,7 +13,7 @@
     <%= fa_icon 'map-marker' %>
     <%= user.location + ' - ' %>
     <%= (Geocoder::Calculations.distance_between([current_user.latitude, current_user.longitude],
-                               [user.latitude, user.longitude]).to_i * 1.8).to_s + ' km distance from you' %>
+                               [user.latitude, user.longitude]).to_i * 1.8).to_i.to_s + ' km distance from you' %>
   </h5>
 <% end %>
 <h5>

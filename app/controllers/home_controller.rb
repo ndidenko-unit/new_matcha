@@ -18,12 +18,14 @@ class HomeController < ApplicationController
     age_range = validate_age(params)
     min_dob = Time.now - age_range[1].years
     max_dob = Time.now - age_range[0].years
+    sex = check_search_sex(params)
     if params[:search_name].present?
-      @users = User.where("name ~* ?", params[:search_name])
+      @users = User.where('LOWER(name) LIKE LOWER(?)', "%#{params[:search_name]}%")
                    .where(dob: min_dob..max_dob)
     else
       @users = User.where(dob: min_dob..max_dob)
     end
+    @users = @users.where(sex: sex) if sex.present?
     @users = (User.where.not(id: current_user.id) - current_user.blocks) if @users.nil?
     @users = @users.paginate(page: params[:page], per_page: 10)
     # @users = User.where("name ~* ?", params[:search]) if params[:search].present?
@@ -40,6 +42,14 @@ class HomeController < ApplicationController
   end
 
   private
+
+  def check_search_sex(params)
+    return if params[:only_girls].blank? && params[:only_boys].blank?
+    return if params[:only_girls].present? && params[:only_boys].present?
+    return 'male' if params[:only_boys].present?
+    'female' if params[:only_girls].present?
+  end
+
   def set_user
     @user = current_user
   end
